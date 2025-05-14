@@ -2,9 +2,6 @@ import inquirer from 'inquirer';
 import { renameFolder, renameFile, listFolders, listItems, BASE_DIR } from '../utils/fileOperations';
 import path from 'path';
 
-/**
- * Handle renaming a folder
- */
 export async function handleRenameFolder(): Promise<void> {
   const folders = listFolders();
   
@@ -42,11 +39,7 @@ export async function handleRenameFolder(): Promise<void> {
   renameFolder(folderToRename, newFolderName.trim());
 }
 
-/**
- * Handle renaming a file
- */
 export async function handleRenameFile(): Promise<void> {
-  // First, select a folder
   const folders = listFolders();
   
   if (folders.length === 0) {
@@ -66,7 +59,6 @@ export async function handleRenameFile(): Promise<void> {
     }
   ]);
   
-  // Then, select a file to rename
   const folderPath = path.join(BASE_DIR, folderName);
   const files = listItems(folderPath).filter(item => !item.isDirectory);
   

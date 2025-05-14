@@ -2,9 +2,6 @@ import inquirer from 'inquirer';
 import { deleteFolder, deleteFile, listFolders, listItems, BASE_DIR } from '../utils/fileOperations';
 import path from 'path';
 
-/**
- * Handle the deletion of a folder
- */
 export async function handleDeleteFolder(): Promise<void> {
   const folders = listFolders();
   
@@ -41,11 +38,7 @@ export async function handleDeleteFolder(): Promise<void> {
   }
 }
 
-/**
- * Handle the deletion of a file
- */
 export async function handleDeleteFile(): Promise<void> {
-  // First, select a folder
   const folders = listFolders();
   
   if (folders.length === 0) {
@@ -65,7 +58,6 @@ export async function handleDeleteFile(): Promise<void> {
     }
   ]);
   
-  // Then, select a file to delete
   const folderPath = path.join(BASE_DIR, folderName);
   const files = listItems(folderPath).filter(item => !item.isDirectory);
   

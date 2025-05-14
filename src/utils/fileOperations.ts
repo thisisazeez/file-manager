@@ -2,24 +2,17 @@ import fs from 'fs';
 import path from 'path';
 import { FileInfo, SortType } from '../types';
 
-// Base directory for the file manager
 export const BASE_DIR = path.join(process.env.HOME || process.env.USERPROFILE || '', 'file-manager');
 
-// Default folders
 export const DEFAULT_FOLDERS = ['pictures', 'music', 'videos', 'documents'];
 
-/**
- * Initialize the file manager by creating the base directory and default folders
- */
 export function initializeFileManager(): void {
   try {
-    // Create base directory if it doesn't exist
     if (!fs.existsSync(BASE_DIR)) {
       fs.mkdirSync(BASE_DIR, { recursive: true });
       console.log(`Created base directory at ${BASE_DIR}`);
     }
 
-    // Create default folders if they don't exist
     DEFAULT_FOLDERS.forEach(folder => {
       const folderPath = path.join(BASE_DIR, folder);
       if (!fs.existsSync(folderPath)) {
@@ -33,9 +26,6 @@ export function initializeFileManager(): void {
   }
 }
 
-/**
- * List all folders in the base directory
- */
 export function listFolders(): FileInfo[] {
   try {
     const items = fs.readdirSync(BASE_DIR);
@@ -50,7 +40,7 @@ export function listFolders(): FileInfo[] {
             name: item,
             path: itemPath,
             isDirectory: true,
-            size: 0, // Directories are shown as 0 size
+            size: 0,
             created: stats.birthtime,
             modified: stats.mtime
           };
@@ -64,9 +54,6 @@ export function listFolders(): FileInfo[] {
   }
 }
 
-/**
- * List all files and folders in a given directory
- */
 export function listItems(dirPath: string, sortType: SortType = SortType.NAME_ASC): FileInfo[] {
   try {
     if (!fs.existsSync(dirPath)) {
@@ -90,7 +77,6 @@ export function listItems(dirPath: string, sortType: SortType = SortType.NAME_AS
       };
     });
 
-    // Sort the items based on sortType
     return sortItems(fileInfos, sortType);
   } catch (error) {
     console.error(`Error listing items in ${dirPath}:`, error);
@@ -98,9 +84,6 @@ export function listItems(dirPath: string, sortType: SortType = SortType.NAME_AS
   }
 }
 
-/**
- * Sort items based on the provided sort type
- */
 export function sortItems(items: FileInfo[], sortType: SortType): FileInfo[] {
   switch (sortType) {
     case SortType.NAME_ASC:
@@ -116,9 +99,6 @@ export function sortItems(items: FileInfo[], sortType: SortType): FileInfo[] {
   }
 }
 
-/**
- * Create a new folder
- */
 export function createFolder(folderName: string): boolean {
   try {
     const folderPath = path.join(BASE_DIR, folderName);
@@ -137,9 +117,6 @@ export function createFolder(folderName: string): boolean {
   }
 }
 
-/**
- * Delete a folder
- */
 export function deleteFolder(folderName: string): boolean {
   try {
     const folderPath = path.join(BASE_DIR, folderName);
@@ -158,9 +135,6 @@ export function deleteFolder(folderName: string): boolean {
   }
 }
 
-/**
- * Rename a folder
- */
 export function renameFolder(oldName: string, newName: string): boolean {
   try {
     const oldPath = path.join(BASE_DIR, oldName);
@@ -185,9 +159,6 @@ export function renameFolder(oldName: string, newName: string): boolean {
   }
 }
 
-/**
- * Create a new file with content
- */
 export function createFile(folderName: string, fileName: string, content: string = ''): boolean {
   try {
     const folderPath = path.join(BASE_DIR, folderName);
@@ -213,9 +184,6 @@ export function createFile(folderName: string, fileName: string, content: string
   }
 }
 
-/**
- * Delete a file
- */
 export function deleteFile(folderName: string, fileName: string): boolean {
   try {
     const filePath = path.join(BASE_DIR, folderName, fileName);
@@ -234,9 +202,6 @@ export function deleteFile(folderName: string, fileName: string): boolean {
   }
 }
 
-/**
- * Rename a file
- */
 export function renameFile(folderName: string, oldFileName: string, newFileName: string): boolean {
   try {
     const folderPath = path.join(BASE_DIR, folderName);

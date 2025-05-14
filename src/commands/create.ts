@@ -2,9 +2,6 @@ import inquirer from 'inquirer';
 import path from 'path';
 import { createFolder, createFile, BASE_DIR } from '../utils/fileOperations';
 
-/**
- * Handle the creation of a new folder
- */
 export async function handleCreateFolder(): Promise<void> {
   const { folderName } = await inquirer.prompt([
     {
@@ -23,11 +20,7 @@ export async function handleCreateFolder(): Promise<void> {
   createFolder(folderName.trim());
 }
 
-/**
- * Handle the creation of a new file
- */
 export async function handleCreateFile(): Promise<void> {
-    // First, select a folder
     const folders = await inquirer.prompt([
       {
         type: 'input',
@@ -47,7 +40,6 @@ export async function handleCreateFile(): Promise<void> {
       }
     ]);
     
-    // Then, get the file name and content
     const { fileName, content } = await inquirer.prompt([
       {
         type: 'input',

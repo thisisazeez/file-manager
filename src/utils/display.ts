@@ -3,9 +3,6 @@ import figlet from 'figlet';
 import { FileInfo } from '../types';
 import path from 'path';
 
-/**
- * Display the application header
- */
 export function displayHeader(): void {
   console.log(
     chalk.blue(
@@ -15,9 +12,6 @@ export function displayHeader(): void {
   console.log(chalk.yellow('A CLI file manager application\n'));
 }
 
-/**
- * Format size to be human-readable
- */
 export function formatSize(size: number): string {
   const units = ['B', 'KB', 'MB', 'GB', 'TB'];
   let formattedSize = size;
@@ -31,16 +25,10 @@ export function formatSize(size: number): string {
   return `${formattedSize.toFixed(2)} ${units[unitIndex]}`;
 }
 
-/**
- * Format date to be human-readable
- */
 export function formatDate(date: Date): string {
   return date.toLocaleString();
 }
 
-/**
- * Display a list of items
- */
 export function displayItems(items: FileInfo[], currentPath: string): void {
   console.log(chalk.green(`\nContents of ${currentPath}:`));
   console.log(chalk.yellow('='.repeat(50)));

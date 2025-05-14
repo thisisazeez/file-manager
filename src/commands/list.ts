@@ -4,9 +4,6 @@ import { SortType } from '../types';
 import { displayItems } from '../utils/display';
 import path from 'path';
 
-/**
- * Handle listing all folders
- */
 export async function handleListFolders(): Promise<void> {
   const folders = listFolders();
   
@@ -18,9 +15,6 @@ export async function handleListFolders(): Promise<void> {
   displayItems(folders, BASE_DIR);
 }
 
-/**
- * Handle listing contents of a selected folder
- */
 export async function handleListContents(): Promise<void> {
   const folders = listFolders();
   

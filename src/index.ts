@@ -22,7 +22,6 @@ import {
   handleRenameFile
 } from './commands/rename';
 
-// Initialize the CLI program
 const program = new Command();
 
 program
@@ -30,10 +29,8 @@ program
   .description('A CLI file manager application')
   .version('1.0.0');
 
-// Initialize the file manager
 initializeFileManager();
 
-// Main menu function
 async function mainMenu(): Promise<void> {
   displayHeader();
   
@@ -90,7 +87,6 @@ async function mainMenu(): Promise<void> {
       break;
   }
   
-  // Continue the menu loop
   if (action !== 'exit') {
     const { continue: shouldContinue } = await inquirer.prompt([
       {
@@ -111,7 +107,6 @@ async function mainMenu(): Promise<void> {
   }
 }
 
-// Run the main menu if executed directly
 if (require.main === module) {
   mainMenu().catch(error => {
     console.error('An error occurred:', error);
@@ -119,7 +114,6 @@ if (require.main === module) {
   });
 }
 
-// Export functions for potential programmatic usage
 export {
   handleListFolders,
   handleListContents,
