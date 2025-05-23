@@ -16,7 +16,7 @@
     "cli",
     "file-manager"
   ],
-  "author": "",
+  "author": "github.com/thisisazeez",
   "license": "MIT",
   "dependencies": {
     "chalk": "^4.1.2",
